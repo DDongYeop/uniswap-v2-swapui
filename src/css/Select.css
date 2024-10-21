@@ -1,0 +1,12 @@
+.Select {
+    width: 480px;
+    height: 480px;
+    padding-top: 50px;
+    margin: 0 auto;
+}
+
+.SelectContainerBackPanel {
+    height: 100%;
+    background: #1F2226;
+    border-radius: 50px;
+}

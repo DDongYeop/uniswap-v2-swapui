@@ -1,0 +1,97 @@
+.Swap {
+  width: 480px;
+  height: 480px;
+  padding-top: 50px;
+  display: none;
+  margin: 0 auto;
+}
+
+.SwapContainerBackPanel {
+  height: 100%;
+  background: #1F2226;
+  border-radius: 50px;
+}
+
+.SwapTopPanel {
+  width: 90%;
+  height: 50px;
+  margin: auto;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.SwapText {
+  height: auto;
+  color: white;
+  font-size: 25px;
+  margin: 10px 0px 0px 5px;
+  align-content: center;
+}
+
+.SettingButton {
+  margin: 20px 10px 0px 0px;
+  height: 30px;
+  width: 30px;
+}
+
+.InputPanel {
+  width: 90%;
+  height: 100px;
+  margin: auto;
+  background:#2a2e34;
+  border-radius: 15px;
+}
+
+.Input {
+  width: 95%;
+  height: 70px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.CountInput {
+  margin: auto;
+  height: 45px;
+  width: 80%;
+  background: #2f343a;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+}
+
+.CoinChange {
+  margin: auto;
+  width: 70px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.USDText {
+  color: gray;
+  margin-top: 0px;
+  margin-right: 85%;
+}
+
+.Arrow {
+  margin: 5px auto;
+  color: white;
+  font-size: 30px;
+  background: #1b1d21;
+  align-content: center;
+  top: 240px;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.SwapButton {
+  margin-top: 20px;
+  width: 90%;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 15px;
+}
