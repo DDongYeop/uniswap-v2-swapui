@@ -6,6 +6,39 @@
   display: flex;
 }
 
+.TopPanel {
+  width: 90%;
+  height: 50px;
+  margin: auto;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.TopText {
+  height: auto;
+  color: white;
+  font-size: 25px;
+  margin: 10px 0px 0px 5px;
+  align-content: center;
+}
+
+.TopButton {
+  margin: 20px 10px 0px 0px;
+  height: 30px;
+  width: 30px;
+}
+
+.TextInput {
+  margin: auto;
+  height: 45px;
+  width: 80%;
+  background: #2f343a;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
