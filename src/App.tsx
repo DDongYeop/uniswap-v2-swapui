@@ -15,6 +15,13 @@ function App() {
   const [searchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
   const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
 
+  const url = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=ethereum`;
+  console.log(url);
+
+  const getCoinData = () => {
+    //axios
+  }
+
   return (
     <div className="App">
       <div className={`Swap`}>
@@ -28,6 +35,7 @@ function App() {
             <CoinCount index={0} coinIndex={getFirstCoin}/>
             <p className='Arrow'>↓</p>
             <CoinCount index={1} coinIndex={getSecondCoin}/>
+            { /* 스왑 버튼 만들어야함. */ }
             <button className='SwapButton' onClick={() => {
               window.confirm("준비 중입니다.");
             }}>스왑</button>
@@ -47,20 +55,23 @@ function App() {
 
   function CoinCount({index, coinIndex} : {index: number, coinIndex: number}) {
 
-    
+    const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+      //숫자만 써지게 하는거. 
+      const input = event.target as HTMLInputElement;
+      input.value = input.value.replace(/[^0-9]/g, ''); //소수점도 같이 없어짐. 
+
+      //state에 적용
+      let coin = [...getCoinCount];
+      coin[index] = +input.value;
+      coin[index].toFixed(10);
+      setCoinCount(coin);
+      console.log(getCoinCount);
+    }
 
     return (
       <div className='InputPanel'> 
         <div className='Input'>``
-          <input className='TextInput' placeholder='0.0' onInput={(result) => {
-            //숫자만 써지게 하는거. (제작중)
-            //const input = result.target as HTMLInputElement;
-            //input.value = input.value.replace(/[^0-9]/g, '');
-            let coin = [...getCoinCount];
-            coin[index] = +result.currentTarget.value;
-            coin[index].toFixed(10);
-            setCoinCount(coin);
-          }}></input>
+          <input className='TextInput' placeholder='0.0' value={getCoinCount[index]} onChange={onChange}></input>
           <button className='CoinChange' onClick={() => {
             setContainer(index);
             setSwap(false);
