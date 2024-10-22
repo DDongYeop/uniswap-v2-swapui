@@ -31,6 +31,8 @@
   margin: 20px 10px 0px 0px;
   height: 30px;
   width: 30px;
+  background: whitesmoke;
+  border-radius: 3px;
 }
 
 .TextInput {

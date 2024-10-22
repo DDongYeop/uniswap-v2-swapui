@@ -5,6 +5,7 @@ import './css/Swap.css'
 import './css/Select.css'
 import coinList from './Data'
 import Modal from './Modal';
+import SettingIcon from './Image/setting.png'
 
 function App() {
   const [isSwap, setSwap] = useState<boolean>(true);
@@ -18,14 +19,14 @@ function App() {
         <div className='SwapContainerBackPanel'>
           <div className='TopPanel'>
             <h5 className='TopText'>스왑</h5>
-            <button className='TopButton' onClick={() => {
-              window.confirm("준비 중입니다.");
-            }}/>
+            <img className='TopButton' src={SettingIcon} onClick={() => {
+                window.confirm("준비 중입니다.");
+              }}/>
           </div>
-          <CoinCount index={0} coinIndex={getFirstCoin}/>
-          <p className='Arrow'>↓</p>
-          <CoinCount index={1} coinIndex={getSecondCoin}/>
-          <button className='SwapButton' onClick={() => {
+            <CoinCount index={0} coinIndex={getFirstCoin}/>
+            <p className='Arrow'>↓</p>
+            <CoinCount index={1} coinIndex={getSecondCoin}/>
+            <button className='SwapButton' onClick={() => {
               window.confirm("준비 중입니다.");
             }}>스왑</button>
         </div>

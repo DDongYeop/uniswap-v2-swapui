@@ -4,6 +4,7 @@ import './css/Select.css'
 import './App.tsx'
 import coinList from './Data'
 import React, { useState } from 'react';
+import CloseIcon from './Image/close.png'
 
 interface ModalProps {
   isOpen: boolean;
@@ -23,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoi
         <div className='SelectContainerBackPanel'>
           <div className='TopPanel'>
             <p className='TopText'>토큰 검색</p>
-            <button className='TopButton' onClick={() => {
+            <img className='TopButton' src={CloseIcon} onClick={() => {
               setOpen(true);
             }}/>
           </div>
