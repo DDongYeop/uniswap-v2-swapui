@@ -3,10 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import './css/Swap.css'
 import './css/Select.css'
+import coinList from './Data'
 import Modal from './Modal';
 
 function App() {
   const [isSwap, setSwap] = useState<boolean>(true);
+  const [getContainer, setContainer] = useState<number>(0);
+  const [getFirstCoin, setFirstCoin] = useState<number>(3);
+  const [getSecondCoin, setSecondCoin] = useState<number>(2);
 
   return (
     <div className="App">
@@ -18,9 +22,9 @@ function App() {
               window.confirm("준비 중입니다.");
             }}/>
           </div>
-          <CoinCount/>
+          <CoinCount index={0} coinIndex={getFirstCoin}/>
           <p className='Arrow'>↓</p>
-          <CoinCount/>
+          <CoinCount index={1} coinIndex={getSecondCoin}/>
           <button className='SwapButton' onClick={() => {
               window.confirm("준비 중입니다.");
             }}>스왑</button>
@@ -29,26 +33,26 @@ function App() {
       <Modal
         isOpen={isSwap}
         setOpen={setSwap}
+        getContainer={getContainer}
+        setFirstCoin={setFirstCoin}
+        setSecondCoin={setSecondCoin}
       />
     </div>
   );
 
-  function CoinCount() {
+  function CoinCount({index, coinIndex} : {index: number, coinIndex: number}) {
     return (
       <div className='InputPanel'> 
         <div className='Input'>``
           <input className='TextInput'></input>
           <button className='CoinChange' onClick={() => {
+            setContainer(index);
             setSwap(false);
-          }}>ETH</button>
+          }}>{coinList[coinIndex].name}</button>
         </div>
         <p className='USDText'>$0.0</p>
       </div>
     )
-  }
-
-  function SwapPanelShow() {
-    setSwap(true);
   }
 }
 
