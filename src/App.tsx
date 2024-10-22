@@ -12,6 +12,8 @@ function App() {
   const [getContainer, setContainer] = useState<number>(0);
   const [getFirstCoin, setFirstCoin] = useState<number>(3);
   const [getSecondCoin, setSecondCoin] = useState<number>(2);
+  const [searchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
+  const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
 
   return (
     <div className="App">
@@ -37,15 +39,28 @@ function App() {
         getContainer={getContainer}
         setFirstCoin={setFirstCoin}
         setSecondCoin={setSecondCoin}
+        searchCoin={searchCoin}
+        setSearchCoin={setSearchCoin}
       />
     </div>
   );
 
   function CoinCount({index, coinIndex} : {index: number, coinIndex: number}) {
+
+    
+
     return (
       <div className='InputPanel'> 
         <div className='Input'>``
-          <input className='TextInput'></input>
+          <input className='TextInput' placeholder='0.0' onInput={(result) => {
+            //숫자만 써지게 하는거. (제작중)
+            //const input = result.target as HTMLInputElement;
+            //input.value = input.value.replace(/[^0-9]/g, '');
+            let coin = [...getCoinCount];
+            coin[index] = +result.currentTarget.value;
+            coin[index].toFixed(10);
+            setCoinCount(coin);
+          }}></input>
           <button className='CoinChange' onClick={() => {
             setContainer(index);
             setSwap(false);

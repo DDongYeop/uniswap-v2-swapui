@@ -12,12 +12,17 @@ interface ModalProps {
   getContainer: number;
   setFirstCoin: React.Dispatch<React.SetStateAction<number>>;
   setSecondCoin: React.Dispatch<React.SetStateAction<number>>;
+  searchCoin: string;
+  setSearchCoin: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoin, setSecondCoin}) => {
+const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoin, setSecondCoin, searchCoin, setSearchCoin}) => {
   if (isOpen)
     return null;
-  
+
+  const filteredData = coinList.filter((item) => item.id.toLowerCase().includes(searchCoin.toLowerCase()) || item.name.toLowerCase().includes(searchCoin.toLowerCase()));
+  const coinData: JSX.Element[] = filteredData.map((data) => <Coin index={data.index} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>);
+
   return (
     <div className='BackPanel'>
       <div className={`Select`}>
@@ -28,20 +33,13 @@ const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoi
               setOpen(true);
             }}/>
           </div>
-          <input className='TextInput'></input>
+          <input className='TextInput' onInput={(input) => {
+            setSearchCoin(input.currentTarget.value);
+          }}></input>
           <div className='RecentList'></div>
-          <div className='TokenScrollView'>
-            <Coin index={0} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={1} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={2} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={3} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={4} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={5} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={6} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={7} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={8} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-            <Coin index={9} setOpen={setOpen} getContainer={getContainer} setFirstCoin={setFirstCoin} setSecondCoin={setSecondCoin}/>
-          </div>
+            <div className='TokenScrollView'>
+              {coinData}
+            </div>
           <button className='TokenListManagement'>토큰 목록 관리</button>
         </div>
       </div>

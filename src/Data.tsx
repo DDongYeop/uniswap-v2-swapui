@@ -1,43 +1,53 @@
 const coinList = [
     {
         name: 'ETH',
-        id: 'ethereum'
+        id: 'ethereum',
+        index: 0
     },
     {
         name: 'USDT',
-        id: 'tether'
+        id: 'tether',
+        index: 1
     },
     {
         name: 'USDC',
-        id: 'usd-coin'
+        id: 'usd-coin',
+        index: 2
     },
     {
         name: 'DAI',
-        id: 'dai'
+        id: 'dai',
+        index: 3
     },
     {
         name: 'AAVE',
-        id: 'aave'
+        id: 'aave',
+        index: 4
     },
     {
         name: 'WBTC',
-        id: 'bitcoin'
+        id: 'bitcoin',
+        index: 5
     },
     {
         name: 'AXS',
-        id: 'axie-infinity'
+        id: 'axie-infinity',
+        index: 6
     },
     {
         name: 'COMP',
-        id: 'compound-coin'
+        id: 'compound-coin',
+        index: 7
     },
     {
         name: 'CRV',
-        id: 'curve-dao-token'
+        id: 'curve-dao-token',
+        index: 8
     },
     {
         name: 'ENS',
-        id: 'ethereum-name-service'
+        id: 'ethereum-name-service',
+        index: 9
     },
 ];
 
