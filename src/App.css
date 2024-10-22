@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.UnShow {
+  display: none;
+}
+
 .TopPanel {
   width: 90%;
   height: 50px;

@@ -1,13 +1,15 @@
+.BackPanel {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
 .Select {
     width: 480px;
     height: 480px;
     padding-top: 50px;
+    display: flex;
     margin: 0 auto;
-    display: none;
-}
-
-.Select > UnShow{
-  display: none;
 }
 
 .SelectContainerBackPanel {

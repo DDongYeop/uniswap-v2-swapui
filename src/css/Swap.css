@@ -6,10 +6,6 @@
   margin: 0 auto;
 }
 
-.Swap > UnShow{
-  display: none;
-}
-
 .SwapContainerBackPanel {
   width: 100%;
   height: 100%;
