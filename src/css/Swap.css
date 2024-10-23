@@ -39,8 +39,8 @@
 
 .USDText {
   color: gray;
-  margin-top: 0px;
-  margin-right: 85%;
+  margin: 0 5%;
+  text-align: left;
 }
 
 .Arrow {

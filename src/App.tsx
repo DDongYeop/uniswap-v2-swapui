@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React, { useRef, useState } from 'react';
 import './App.css';
 import './css/Swap.css'
 import './css/Select.css'
 import coinList from './Data'
 import Modal from './Modal';
 import SettingIcon from './Image/setting.png'
+import axios from 'axios'
+
+function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
+  //axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
+  //  .then(res => {
+  //    setCoinPrice(+res.data[coinList[idx].id]['usd']);
+  //    console.log(+res.data[coinList[idx].id]['usd']);
+  //  });
+}
 
 function App() {
   const [isSwap, setSwap] = useState<boolean>(true);
   const [getContainer, setContainer] = useState<number>(0);
   const [getFirstCoin, setFirstCoin] = useState<number>(3);
+  const [getFirstCoinPrice, setFirstCoinPrice] = useState<number>(0);
   const [getSecondCoin, setSecondCoin] = useState<number>(2);
+  const [getSecondCoinPrice, setSecondCoinPrice] = useState<number>(0);
   const [searchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
   const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
+  const [getInputElement, setInputElement] = useState<React.FocusEvent<HTMLInputElement, Element>>();
 
-  const url = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=ethereum`;
-  console.log(url);
-
-  const getCoinData = () => {
-    //axios
-  }
+  SetCoinPrice(getFirstCoin, setFirstCoinPrice);
+  SetCoinPrice(getSecondCoin, setSecondCoinPrice);
 
   return (
     <div className="App">
@@ -49,6 +56,8 @@ function App() {
         setSecondCoin={setSecondCoin}
         searchCoin={searchCoin}
         setSearchCoin={setSearchCoin}
+        setFirstCoinPrice={setFirstCoinPrice}
+        setSecondCoinPrice={setSecondCoinPrice}
       />
     </div>
   );
@@ -65,7 +74,6 @@ function App() {
       coin[index] = +input.value;
       coin[index].toFixed(10);
       setCoinCount(coin);
-      console.log(getCoinCount);
     }
 
     return (
@@ -77,10 +85,18 @@ function App() {
             setSwap(false);
           }}>{coinList[coinIndex].name}</button>
         </div>
-        <p className='USDText'>$0.0</p>
+        <p className='USDText'>${
+          getCoinCount[0] != 0 ?
+          getCoinCount[index] * (index == 0 ? getFirstCoinPrice : getSecondCoinPrice) : 0
+        }</p>
       </div>
     )
   }
+}
+
+function OnFocus(element: React.FocusEvent<HTMLInputElement, Element>) {
+  console.log(111);
+  element.target.focus();
 }
 
 export default App;
