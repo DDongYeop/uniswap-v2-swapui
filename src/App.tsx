@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import coinList from './Other/Data'
 import axios from 'axios'
 import Swap from './Swap/Swap'
@@ -15,9 +15,15 @@ function App() {
   const [getSecondCoinPrice, setSecondCoinPrice] = useState<number>(0);
   const [getSearchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
   const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
+  const [getIsFirst, setIsFirst] = useState<boolean>(true);
 
-  SetCoinPrice(getFirstCoin, setFirstCoinPrice);
-  SetCoinPrice(getSecondCoin, setSecondCoinPrice);
+  if (getIsFirst)
+  {
+      SetCoinPrice(getFirstCoin, setFirstCoinPrice);
+      SetCoinPrice(getSecondCoin, setSecondCoinPrice);
+      setIsFirst(false);
+  }
+
 
   return (
     <Swap 
@@ -42,9 +48,11 @@ function App() {
 }
 
 function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
+  console.log(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`);
   axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
     .then(res => {
       setCoinPrice(+res.data[coinList[idx].id]['usd']);
+      console.log(+res.data[coinList[idx].id]['usd']);
     });
 }
 

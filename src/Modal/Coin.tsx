@@ -4,6 +4,7 @@ import '../App'
 import coinList from '../Other/Data'
 import React, { useState } from 'react';
 import axios from 'axios'
+import CoinCount from '../Swap/CoinCount';
 
 interface CoinProps {
   index: number;
@@ -11,7 +12,7 @@ interface CoinProps {
   getContainer: number;
   setFirstCoin: React.Dispatch<React.SetStateAction<number>>;
   setSecondCoin: React.Dispatch<React.SetStateAction<number>>;
-  setCoinPrice: React.Dispatch<React.SetStateAction<number>>
+  setCoinPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function Coin({index, setOpen, getContainer, setFirstCoin, setSecondCoin, setCoinPrice} : CoinProps ) {
@@ -34,6 +35,5 @@ function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAc
   axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
     .then(res => {
       setCoinPrice(+res.data[coinList[idx].id]['usd']);
-      console.log(+res.data[coinList[idx].id]['usd']);
     });
 }
