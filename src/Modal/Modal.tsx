@@ -1,10 +1,9 @@
-import { log } from 'console';
-import './App.css';
-import './css/Select.css'
-import './App.tsx'
-import coinList from './Data'
+import '../App.css';
+import '../css/Select.css'
+import '../App'
+import coinList from '../Other/Data'
 import React, { useState } from 'react';
-import CloseIcon from './Image/close.png'
+import CloseIcon from '../Image/close.png'
 import axios from 'axios'
 
 interface ModalProps {

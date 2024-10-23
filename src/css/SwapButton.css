@@ -1,0 +1,12 @@
+.SwapButton {
+    margin-top: 20px;
+    width: 90%;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 15px;
+    background: blue;
+  }
+  
+.disabled {
+    background: gray;
+}
