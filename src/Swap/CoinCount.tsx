@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import '../App.css';
 import '../css/Swap.css'
 import coinList from '../Other/Data'
@@ -15,6 +16,7 @@ interface CoinCountPrps {
 }
 
 export default function CoinCount({index, coinIndex, setSwap, setContainer, getCurrentCoinPrice, getOtherCoinPrice, getCoinCount, setCoinCount, setLastSelect} : CoinCountPrps) {
+    const [getKey, setKey] = useState<boolean>(true);
     const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         //숫자만 써지게 하는거. 
         const input = event.target as HTMLInputElement;
@@ -42,6 +44,7 @@ export default function CoinCount({index, coinIndex, setSwap, setContainer, getC
             <button className='CoinChange' onClick={() => {
                 setContainer(index);
                 setSwap(false);
+                setKey(true);
             }}>{coinList[coinIndex].name}</button>
         </div>
         <p className='USDText'>${

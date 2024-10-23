@@ -16,11 +16,23 @@ function App() {
   const [getSearchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
   const [getLastSelect, setLastSelect] = useState<number>(0);
   const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
+  const [getIsFirst, setIsFirst] = useState<boolean>(true);
 
-  SetCoinPrice(getFirstCoin, setFirstCoinPrice);
-  SetCoinPrice(getSecondCoin, setSecondCoinPrice);
+  let renderCnt = 1;
 
-  CoinSetting(getLastSelect, getCoinCount, getFirstCoinPrice, getSecondCoinPrice);
+  if (getIsFirst)
+  {
+    SetCoinPrice(getFirstCoin, setFirstCoinPrice);
+    SetCoinPrice(getSecondCoin, setSecondCoinPrice);
+    setIsFirst(false);
+  }
+
+  renderCnt++;
+  if (renderCnt >= 3)
+  {
+    CoinSetting(getLastSelect, setCoinCount, getCoinCount, getFirstCoinPrice, getSecondCoinPrice);
+    renderCnt = 0;
+  }
 
   return (
     <Swap 
@@ -52,8 +64,7 @@ function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAc
     });
 }
 
-function CoinSetting(getLastSelect: number, getCoinCount:number[], getFirstCoinPrice:number, getSecondCoinPrice:number)
-{
+function CoinSetting(getLastSelect: number, setCoinCount: React.Dispatch<React.SetStateAction<number[]>>, getCoinCount:number[], getFirstCoinPrice:number, getSecondCoinPrice:number) {
   let coin = [...getCoinCount];
   coin[getLastSelect] = getCoinCount[getLastSelect];
   coin[getLastSelect].toFixed(10); 
@@ -66,7 +77,7 @@ function CoinSetting(getLastSelect: number, getCoinCount:number[], getFirstCoinP
     coin[idx] = (coin[getLastSelect] * getSecondCoinPrice) / getFirstCoinPrice;
   coin[idx].toFixed(10);
 
-  console.log(`${getCoinCount[0]}  ${getCoinCount[1]}`);
+  setCoinCount(coin);
 }
 
 export default App;
