@@ -2,12 +2,14 @@ import React, { useRef, useState } from 'react';
 import coinList from './Other/Data'
 import axios from 'axios'
 import Swap from './Swap/Swap'
-//import './App.css'
 import './css/Swap.css'
 import './css/Modal.css'
 
+//렌더링 되는 횟수
+let renderCnt = 1;
+
 function App() {
-  const [getIsSwap, setIsSwap] = useState<boolean>(true);
+  const [getIsSwap, setIsSwap] = useState<boolean>(true);   
   const [getContainer, setContainer] = useState<number>(0);
   const [getFirstCoin, setFirstCoin] = useState<number>(3);
   const [getFirstCoinPrice, setFirstCoinPrice] = useState<number>(0);
@@ -18,20 +20,18 @@ function App() {
   const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
   const [getIsFirst, setIsFirst] = useState<boolean>(true);
 
-  let renderCnt = 1;
-
   if (getIsFirst)
   {
+    setIsFirst(false);
     SetCoinPrice(getFirstCoin, setFirstCoinPrice);
     SetCoinPrice(getSecondCoin, setSecondCoinPrice);
-    setIsFirst(false);
   }
 
   renderCnt++;
   if (renderCnt >= 3)
   {
-    CoinSetting(getLastSelect, setCoinCount, getCoinCount, getFirstCoinPrice, getSecondCoinPrice);
     renderCnt = 0;
+    CoinSetting(getLastSelect, setCoinCount, getCoinCount, getFirstCoinPrice, getSecondCoinPrice);
   }
 
   return (
@@ -72,9 +72,9 @@ function CoinSetting(getLastSelect: number, setCoinCount: React.Dispatch<React.S
   let idx = getLastSelect + 1;
   idx = idx == 2 ? 0 : 1;
   if (getLastSelect)
-    coin[idx] = (coin[getLastSelect] * getFirstCoinPrice) / getSecondCoinPrice;
-  else
     coin[idx] = (coin[getLastSelect] * getSecondCoinPrice) / getFirstCoinPrice;
+  else
+    coin[idx] = (coin[getLastSelect] * getFirstCoinPrice) / getSecondCoinPrice;
   coin[idx].toFixed(10);
 
   setCoinCount(coin);
