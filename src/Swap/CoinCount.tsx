@@ -1,7 +1,6 @@
 import '../App.css';
 import '../css/Swap.css'
 import coinList from '../Other/Data'
-import SetValue from '../Other/SetValue';
 
 interface CoinCountProps {
     index: number;
@@ -12,15 +11,28 @@ interface CoinCountProps {
     getOtherCoinPrice: number;
     getCoinCount: number[];
     setCoinCount: React.Dispatch<React.SetStateAction<number[]>>;
+    setLastSelect: React.Dispatch<React.SetStateAction<number>>; 
 }
 
-export default function CoinCount({index, coinIndex, setSwap, setContainer, getCurrentCoinPrice, getOtherCoinPrice, getCoinCount, setCoinCount} : CoinCountProps) {
+export default function CoinCount({index, coinIndex, setSwap, setContainer, getCurrentCoinPrice, getOtherCoinPrice, getCoinCount, setCoinCount, setLastSelect} : CoinCountProps) {
     const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         //숫자만 써지게 하는거. 
         const input = event.target as HTMLInputElement;
         input.value = input.value.replace(/[^0-9\.]/g, ""); //소수점도 같이 없어짐. 
 
-        SetValue(getCoinCount, index, input.value, getCurrentCoinPrice, getOtherCoinPrice, setCoinCount);
+        //현 코인 state에 적용
+        let coin = [...getCoinCount];
+        coin[index] = +input;
+        coin[index].toFixed(10); 
+
+        //다른 코인 state에 적용
+        let idx = index + 1;
+        idx = idx == 2 ? 0 : 1;
+        coin[idx] = (coin[index] * getCurrentCoinPrice) / getOtherCoinPrice;
+        coin[idx].toFixed(10);
+
+        setCoinCount(coin);
+        setLastSelect(index);
       }
     
       return (

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import coinList from './Other/Data'
 import axios from 'axios'
 import Swap from './Swap/Swap'
-//import './App.css'
 import './css/Swap.css'
 import './css/Modal.css'
 
@@ -15,16 +14,18 @@ function App() {
   const [getSecondCoinPrice, setSecondCoinPrice] = useState<number>(0);
   const [getSearchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
   const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
+  const [getLastSelect, setLastSelect] = useState<number>(0);
   const [getIsFirst, setIsFirst] = useState<boolean>(true);
 
   if (getIsFirst)
   {
-      SetCoinPrice(getFirstCoin, setFirstCoinPrice);
-      SetCoinPrice(getSecondCoin, setSecondCoinPrice);
-      setIsFirst(false);
+    SetCoinPrice(getFirstCoin, setFirstCoinPrice);
+    SetCoinPrice(getSecondCoin, setSecondCoinPrice);
+    setIsFirst(false);
   }
 
-
+  CoinSetting(getLastSelect, getCoinCount, getFirstCoinPrice, getSecondCoinPrice);
+  
   return (
     <Swap 
       getIsSwap={getIsSwap}
@@ -43,6 +44,7 @@ function App() {
       setSearchCoin={setSearchCoin}
       getCoinCount={getCoinCount}
       setCoinCount={setCoinCount}
+      setLastSelect={setLastSelect}
     ></Swap>
   );
 }
@@ -52,8 +54,22 @@ function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAc
   axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
     .then(res => {
       setCoinPrice(+res.data[coinList[idx].id]['usd']);
-      console.log(+res.data[coinList[idx].id]['usd']);
     });
+}
+
+function CoinSetting(getLastSelect: number, getCoinCount:number[], getFirstCoinPrice:number, getSecondCoinPrice:number)
+{
+  let coin = [...getCoinCount];
+  coin[getLastSelect] = getCoinCount[getLastSelect];
+  coin[getLastSelect].toFixed(10); 
+
+  let idx = getLastSelect + 1;
+  idx = idx == 2 ? 0 : 1;
+  if (getLastSelect)
+    coin[idx] = (coin[getLastSelect] * getFirstCoinPrice) / getSecondCoinPrice;
+  else
+    coin[idx] = (coin[getLastSelect] * getSecondCoinPrice) / getFirstCoinPrice;
+  coin[idx].toFixed(10);
 }
 
 export default App;

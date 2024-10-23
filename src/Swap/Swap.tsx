@@ -22,9 +22,10 @@ interface SwapProps {
     setSearchCoin: React.Dispatch<React.SetStateAction<string>>;
     getCoinCount: number[];
     setCoinCount: React.Dispatch<React.SetStateAction<number[]>>; 
+    setLastSelect: React.Dispatch<React.SetStateAction<number>>; 
 }
 
-export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount} : SwapProps) {
+export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount, setLastSelect} : SwapProps) {
     return (
         <div className="App">
             <div className={`Swap`}>
@@ -43,7 +44,8 @@ export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, 
                         getCurrentCoinPrice={getFirstCoinPrice} 
                         getOtherCoinPrice={getSecondCoinPrice} 
                         getCoinCount={getCoinCount} 
-                        setCoinCount={setCoinCount}/>
+                        setCoinCount={setCoinCount}
+                        setLastSelect={setLastSelect}/>
                     <p className='Arrow'>↓</p>
                     <CoinCount 
                         index={1} 
@@ -53,7 +55,8 @@ export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, 
                         getCurrentCoinPrice={getSecondCoinPrice} 
                         getOtherCoinPrice={getFirstCoinPrice} 
                         getCoinCount={getCoinCount} 
-                        setCoinCount={setCoinCount}/>
+                        setCoinCount={setCoinCount}
+                        setLastSelect={setLastSelect}/>
                     <SwapButton getCoinCount={getCoinCount}></SwapButton>
                 </div>
             </div>
