@@ -1,10 +1,10 @@
 import '../App.css';
-import '../css/Select.css'
+import '../css/Modal.css'
 import '../App'
 import coinList from '../Other/Data'
 import React, { useState } from 'react';
 import CloseIcon from '../Image/close.png'
-import axios from 'axios'
+import Coin from './Coin';
 
 interface ModalProps {
   isOpen: boolean;
@@ -27,8 +27,8 @@ const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoi
 
   return (
     <div className='BackPanel'>
-      <div className={`Select`}>
-        <div className='SelectContainerBackPanel'>
+      <div className={`Modal`}>
+        <div className='ModalContainerBackPanel'>
           <div className='TopPanel'>
             <p className='TopText'>토큰 검색</p>
             <img className='TopButton' src={CloseIcon} onClick={() => {
@@ -49,30 +49,5 @@ const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoi
     
   )
 }
-
-function Coin({index, setOpen, getContainer, setFirstCoin, setSecondCoin, setCoinPrice} : {index: number, setOpen: React.Dispatch<React.SetStateAction<boolean>>, getContainer: number, setFirstCoin: React.Dispatch<React.SetStateAction<number>>, setSecondCoin: React.Dispatch<React.SetStateAction<number>>, setCoinPrice: React.Dispatch<React.SetStateAction<number>>}) {
-  return (
-    <button className='CoinButton' onClick={() => {
-      setOpen(true);
-      getContainer == 0 ? setFirstCoin(index) : setSecondCoin(index);
-      SetCoinPrice(index, setCoinPrice);
-    }}>
-      <div className='CoinImage'/>
-      <div className='CoinNameArea'>
-        <p className='CoinName'>{coinList[index].name}</p>
-        <p className='CoinFullName'>{coinList[index].id}</p>
-      </div>
-    </button>
-  )
-}
-
-function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
-  axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
-    .then(res => {
-      setCoinPrice(+res.data[coinList[idx].id]['usd']);
-      console.log(+res.data[coinList[idx].id]['usd']);
-    });
-}
-
 
 export default Modal;

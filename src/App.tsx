@@ -4,14 +4,7 @@ import axios from 'axios'
 import Swap from './Swap/Swap'
 //import './App.css'
 import './css/Swap.css'
-import './css/Select.css'
-
-function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
-  axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
-    .then(res => {
-      setCoinPrice(+res.data[coinList[idx].id]['usd']);
-    });
-}
+import './css/Modal.css'
 
 function App() {
   const [getIsSwap, setIsSwap] = useState<boolean>(true);
@@ -46,6 +39,13 @@ function App() {
       setCoinCount={setCoinCount}
     ></Swap>
   );
+}
+
+function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
+  axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
+    .then(res => {
+      setCoinPrice(+res.data[coinList[idx].id]['usd']);
+    });
 }
 
 export default App;
