@@ -5,7 +5,7 @@ import SettingIcon from '../Image/setting.png'
 import CoinCount from './CoinCount'
 import SwapButton from './SwapButton';
 
-interface SwapProps {
+interface SwapPrps {
     getIsSwap: boolean;
     setIsSwap: React.Dispatch<React.SetStateAction<boolean>>;
     getContainer: number;
@@ -25,7 +25,7 @@ interface SwapProps {
     setLastSelect: React.Dispatch<React.SetStateAction<number>>; 
 }
 
-export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount, setLastSelect} : SwapProps) {
+export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount, setLastSelect} : SwapPrps) {
     return (
         <div className="App">
             <div className={`Swap`}>
@@ -36,8 +36,7 @@ export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, 
                       window.confirm("준비 중입니다.");
                     }}/>
                 </div>
-                    <CoinCount 
-                        index={0} 
+                    <CoinCount index={0} 
                         coinIndex={getFirstCoin} 
                         setSwap={setIsSwap} 
                         setContainer={setContainer} 
@@ -57,6 +56,7 @@ export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, 
                         getCoinCount={getCoinCount} 
                         setCoinCount={setCoinCount}
                         setLastSelect={setLastSelect}/>
+                    { /* 스왑 버튼 만들어야함. */ }
                     <SwapButton getCoinCount={getCoinCount}></SwapButton>
                 </div>
             </div>

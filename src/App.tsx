@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import coinList from './Other/Data'
 import axios from 'axios'
 import Swap from './Swap/Swap'
+//import './App.css'
 import './css/Swap.css'
 import './css/Modal.css'
 
@@ -13,19 +14,14 @@ function App() {
   const [getSecondCoin, setSecondCoin] = useState<number>(2);
   const [getSecondCoinPrice, setSecondCoinPrice] = useState<number>(0);
   const [getSearchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
-  const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
   const [getLastSelect, setLastSelect] = useState<number>(0);
-  const [getIsFirst, setIsFirst] = useState<boolean>(true);
+  const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
 
-  if (getIsFirst)
-  {
-    SetCoinPrice(getFirstCoin, setFirstCoinPrice);
-    SetCoinPrice(getSecondCoin, setSecondCoinPrice);
-    setIsFirst(false);
-  }
+  SetCoinPrice(getFirstCoin, setFirstCoinPrice);
+  SetCoinPrice(getSecondCoin, setSecondCoinPrice);
 
   CoinSetting(getLastSelect, getCoinCount, getFirstCoinPrice, getSecondCoinPrice);
-  
+
   return (
     <Swap 
       getIsSwap={getIsSwap}
@@ -50,7 +46,6 @@ function App() {
 }
 
 function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
-  console.log(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`);
   axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
     .then(res => {
       setCoinPrice(+res.data[coinList[idx].id]['usd']);
@@ -70,6 +65,8 @@ function CoinSetting(getLastSelect: number, getCoinCount:number[], getFirstCoinP
   else
     coin[idx] = (coin[getLastSelect] * getSecondCoinPrice) / getFirstCoinPrice;
   coin[idx].toFixed(10);
+
+  console.log(`${getCoinCount[0]}  ${getCoinCount[1]}`);
 }
 
 export default App;
