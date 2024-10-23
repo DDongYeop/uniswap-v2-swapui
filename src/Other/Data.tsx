@@ -1,3 +1,5 @@
+// 데이터 값 적용.
+
 const coinList = [
     {
         name: 'ETH',

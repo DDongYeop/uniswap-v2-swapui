@@ -33,10 +33,11 @@ export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, 
                 <div className='TopPanel'>
                     <h5 className='TopText'>스왑</h5>
                     <img className='TopButton' src={SettingIcon} onClick={() => {
-                      window.confirm("준비 중입니다.");
+                      window.confirm("준비 중입니다."); // 준비중 alert
                     }}/>
                 </div>
-                    <CoinCount index={0} 
+                    <CoinCount // 코인 개수 입력 판넬
+                        index={0}  
                         coinIndex={getFirstCoin} 
                         setSwap={setIsSwap} 
                         setContainer={setContainer} 
@@ -46,7 +47,7 @@ export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, 
                         setCoinCount={setCoinCount}
                         setLastSelect={setLastSelect}/>
                     <p className='Arrow'>↓</p>
-                    <CoinCount 
+                    <CoinCount // 코인 개수 입력 판넬
                         index={1} 
                         coinIndex={getSecondCoin} 
                         setSwap={setIsSwap} 

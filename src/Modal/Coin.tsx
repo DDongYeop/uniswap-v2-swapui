@@ -4,7 +4,6 @@ import '../App'
 import coinList from '../Other/Data'
 import React, { useState } from 'react';
 import axios from 'axios'
-import CoinCount from '../Swap/CoinCount';
 
 interface CoinProps {
   index: number;
@@ -16,20 +15,21 @@ interface CoinProps {
 }
 
 export default function Coin({index, setOpen, getContainer, setFirstCoin, setSecondCoin, setCoinPrice} : CoinProps ) {
-    return (
-        <button className='CoinButton' onClick={() => {
-                setOpen(true);
-                getContainer == 0 ? setFirstCoin(index) : setSecondCoin(index);
-                SetCoinPrice(index, setCoinPrice);
-            }}>
-            <div className='CoinNameArea'>
-                <p className='CoinName'>{coinList[index].name}</p>
-                <p className='CoinFullName'>{coinList[index].id}</p>
-            </div>
-        </button>
+  return (
+    <button className='CoinButton' onClick={() => {
+      setOpen(true);
+      getContainer == 0 ? setFirstCoin(index) : setSecondCoin(index);
+      SetCoinPrice(index, setCoinPrice);
+      }}>
+      <div className='CoinNameArea'>
+        <p className='CoinName'>{coinList[index].name}</p>
+        <p className='CoinFullName'>{coinList[index].id}</p>
+      </div>
+    </button>
     )
 }
 
+// coingecko API가져오기
 function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
   axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
     .then(res => {
