@@ -21,7 +21,6 @@ export default function Coin({index, setOpen, getContainer, setFirstCoin, setSec
                 getContainer == 0 ? setFirstCoin(index) : setSecondCoin(index);
                 SetCoinPrice(index, setCoinPrice);
             }}>
-            <div className='CoinImage'/>
             <div className='CoinNameArea'>
                 <p className='CoinName'>{coinList[index].name}</p>
                 <p className='CoinFullName'>{coinList[index].id}</p>

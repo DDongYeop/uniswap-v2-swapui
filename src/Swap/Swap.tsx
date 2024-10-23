@@ -22,9 +22,10 @@ interface SwapPrps {
     setSearchCoin: React.Dispatch<React.SetStateAction<string>>;
     getCoinCount: number[];
     setCoinCount: React.Dispatch<React.SetStateAction<number[]>>; 
+    setLastSelect: React.Dispatch<React.SetStateAction<number>>; 
 }
 
-export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount} : SwapPrps) {
+export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount, setLastSelect} : SwapPrps) {
     return (
         <div className="App">
             <div className={`Swap`}>
@@ -35,9 +36,26 @@ export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, 
                       window.confirm("준비 중입니다.");
                     }}/>
                 </div>
-                    <CoinCount index={0} coinIndex={getFirstCoin} setSwap={setIsSwap} setContainer={setContainer} getCurrentCoinPrice={getFirstCoinPrice} getOtherCoinPrice={getSecondCoinPrice} getCoinCount={getCoinCount} setCoinCount={setCoinCount}/>
+                    <CoinCount index={0} 
+                        coinIndex={getFirstCoin} 
+                        setSwap={setIsSwap} 
+                        setContainer={setContainer} 
+                        getCurrentCoinPrice={getFirstCoinPrice} 
+                        getOtherCoinPrice={getSecondCoinPrice} 
+                        getCoinCount={getCoinCount} 
+                        setCoinCount={setCoinCount}
+                        setLastSelect={setLastSelect}/>
                     <p className='Arrow'>↓</p>
-                    <CoinCount index={1} coinIndex={getSecondCoin} setSwap={setIsSwap} setContainer={setContainer} getCurrentCoinPrice={getSecondCoinPrice} getOtherCoinPrice={getFirstCoinPrice} getCoinCount={getCoinCount} setCoinCount={setCoinCount}/>
+                    <CoinCount 
+                        index={1} 
+                        coinIndex={getSecondCoin} 
+                        setSwap={setIsSwap} 
+                        setContainer={setContainer} 
+                        getCurrentCoinPrice={getSecondCoinPrice} 
+                        getOtherCoinPrice={getFirstCoinPrice} 
+                        getCoinCount={getCoinCount} 
+                        setCoinCount={setCoinCount}
+                        setLastSelect={setLastSelect}/>
                     { /* 스왑 버튼 만들어야함. */ }
                     <SwapButton getCoinCount={getCoinCount}></SwapButton>
                 </div>

@@ -43,7 +43,9 @@ export default function Modal({isOpen, setOpen, getContainer, setFirstCoin, setS
             <div className='TokenScrollView'>
               {coinData}
             </div>
-          <button className='TokenListManagement'>토큰 목록 관리</button>
+          <button className='TokenListManagement' onClick={() => {
+              window.confirm("준비 중입니다.");
+          }}>토큰 목록 관리</button>
         </div>
       </div>
     </div>

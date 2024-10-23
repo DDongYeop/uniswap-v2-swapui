@@ -11,9 +11,10 @@ interface CoinCountPrps {
     getOtherCoinPrice: number;
     getCoinCount: number[];
     setCoinCount: React.Dispatch<React.SetStateAction<number[]>>;
+    setLastSelect: React.Dispatch<React.SetStateAction<number>>; 
 }
 
-export default function CoinCount({index, coinIndex, setSwap, setContainer, getCurrentCoinPrice, getOtherCoinPrice, getCoinCount, setCoinCount} : CoinCountPrps) {
+export default function CoinCount({index, coinIndex, setSwap, setContainer, getCurrentCoinPrice, getOtherCoinPrice, getCoinCount, setCoinCount, setLastSelect} : CoinCountPrps) {
     const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         //숫자만 써지게 하는거. 
         const input = event.target as HTMLInputElement;
@@ -31,6 +32,7 @@ export default function CoinCount({index, coinIndex, setSwap, setContainer, getC
         coin[idx].toFixed(10);
     
         setCoinCount(coin);
+        setLastSelect(index);
       }
     
       return (
