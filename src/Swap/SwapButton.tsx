@@ -3,7 +3,8 @@ import '../css/SwapButton.css';
 interface SwapButtonProps {
     getCoinCount: number[];
 }
-const SwapButton: React.FC<SwapButtonProps> = ({getCoinCount}) => {
+
+export default function SwapButton({getCoinCount} : SwapButtonProps) {
     if (getCoinCount[0] != 0) //활성 해주어야한다.
     {
         return (
@@ -18,5 +19,3 @@ const SwapButton: React.FC<SwapButtonProps> = ({getCoinCount}) => {
         )
     }
 }
-
-export default SwapButton;

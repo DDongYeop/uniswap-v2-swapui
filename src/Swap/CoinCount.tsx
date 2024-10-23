@@ -13,7 +13,7 @@ interface CoinCountPrps {
     setCoinCount: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const CoinCount: React.FC<CoinCountPrps> = ({index, coinIndex, setSwap, setContainer, getCurrentCoinPrice, getOtherCoinPrice, getCoinCount, setCoinCount}) => {
+export default function CoinCount({index, coinIndex, setSwap, setContainer, getCurrentCoinPrice, getOtherCoinPrice, getCoinCount, setCoinCount} : CoinCountPrps) {
     const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         //숫자만 써지게 하는거. 
         const input = event.target as HTMLInputElement;
@@ -52,5 +52,3 @@ const CoinCount: React.FC<CoinCountPrps> = ({index, coinIndex, setSwap, setConta
 function OnFocus(element: React.ChangeEvent<HTMLInputElement>) {
     element.currentTarget.focus();
 }
-
-export default CoinCount

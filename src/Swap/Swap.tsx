@@ -24,7 +24,7 @@ interface SwapPrps {
     setCoinCount: React.Dispatch<React.SetStateAction<number[]>>; 
 }
 
-const Swap: React.FC<SwapPrps> = ({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount}) => {
+export default function Swap({getIsSwap, setIsSwap, getContainer, setContainer, getFirstCoin, setFirstCoin, getFirstCoinPrice, setFirstCoinPrice, getSecondCoin, setSecondCoin, getSecondCoinPrice, setSecondCoinPrice, getSearchCoin, setSearchCoin, getCoinCount, setCoinCount} : SwapPrps) {
     return (
         <div className="App">
             <div className={`Swap`}>
@@ -56,5 +56,3 @@ const Swap: React.FC<SwapPrps> = ({getIsSwap, setIsSwap, getContainer, setContai
         </div>
     )
 }
-
-export default Swap

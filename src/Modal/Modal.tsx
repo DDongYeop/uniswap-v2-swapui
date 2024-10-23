@@ -18,7 +18,8 @@ interface ModalProps {
   setSecondCoinPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoin, setSecondCoin, searchCoin, setSearchCoin, setFirstCoinPrice, setSecondCoinPrice}) => {
+
+export default function Modal({isOpen, setOpen, getContainer, setFirstCoin, setSecondCoin, searchCoin, setSearchCoin, setFirstCoinPrice, setSecondCoinPrice} : ModalProps) {
   if (isOpen)
     return null;
 
@@ -49,5 +50,3 @@ const Modal: React.FC<ModalProps> = ({isOpen, setOpen, getContainer, setFirstCoi
     
   )
 }
-
-export default Modal;
