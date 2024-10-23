@@ -8,11 +8,11 @@ import SettingIcon from './Image/setting.png'
 import axios from 'axios'
 
 function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
-  //axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
-  //  .then(res => {
-  //    setCoinPrice(+res.data[coinList[idx].id]['usd']);
-  //    console.log(+res.data[coinList[idx].id]['usd']);
-  //  });
+  axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
+    .then(res => {
+      setCoinPrice(+res.data[coinList[idx].id]['usd']);
+      console.log(+res.data[coinList[idx].id]['usd']);
+    });
 }
 
 function App() {
@@ -24,7 +24,6 @@ function App() {
   const [getSecondCoinPrice, setSecondCoinPrice] = useState<number>(0);
   const [searchCoin, setSearchCoin] = useState<string>(''); //검색창 상태 관리
   const [getCoinCount, setCoinCount] = useState<number[]>([0, 0]);
-  const [getInputElement, setInputElement] = useState<React.FocusEvent<HTMLInputElement, Element>>();
 
   SetCoinPrice(getFirstCoin, setFirstCoinPrice);
   SetCoinPrice(getSecondCoin, setSecondCoinPrice);
@@ -39,9 +38,9 @@ function App() {
                 window.confirm("준비 중입니다.");
               }}/>
           </div>
-            <CoinCount index={0} coinIndex={getFirstCoin}/>
+            <CoinCount index={0} coinIndex={getFirstCoin} setSwap={setSwap} setContainer={setContainer} getFirstCoinPrice={getFirstCoinPrice} getSecondCoinPrice={getSecondCoinPrice} getCoinCount={getCoinCount} setCoinCount={setCoinCount}/>
             <p className='Arrow'>↓</p>
-            <CoinCount index={1} coinIndex={getSecondCoin}/>
+            <CoinCount index={1} coinIndex={getSecondCoin} setSwap={setSwap} setContainer={setContainer} getFirstCoinPrice={getFirstCoinPrice} getSecondCoinPrice={getSecondCoinPrice} getCoinCount={getCoinCount} setCoinCount={setCoinCount}/>
             { /* 스왑 버튼 만들어야함. */ }
             <button className='SwapButton' onClick={() => {
               window.confirm("준비 중입니다.");
@@ -61,42 +60,42 @@ function App() {
       />
     </div>
   );
-
-  function CoinCount({index, coinIndex} : {index: number, coinIndex: number}) {
-
-    const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-      //숫자만 써지게 하는거. 
-      const input = event.target as HTMLInputElement;
-      input.value = input.value.replace(/[^0-9]/g, ''); //소수점도 같이 없어짐. 
-
-      //state에 적용
-      let coin = [...getCoinCount];
-      coin[index] = +input.value;
-      coin[index].toFixed(10);
-      setCoinCount(coin);
-    }
-
-    return (
-      <div className='InputPanel'> 
-        <div className='Input'>``
-          <input className='TextInput' placeholder='0.0' value={getCoinCount[index]} onChange={onChange}></input>
-          <button className='CoinChange' onClick={() => {
-            setContainer(index);
-            setSwap(false);
-          }}>{coinList[coinIndex].name}</button>
-        </div>
-        <p className='USDText'>${
-          getCoinCount[0] != 0 ?
-          getCoinCount[index] * (index == 0 ? getFirstCoinPrice : getSecondCoinPrice) : 0
-        }</p>
-      </div>
-    )
-  }
 }
 
-function OnFocus(element: React.FocusEvent<HTMLInputElement, Element>) {
-  console.log(111);
-  element.target.focus();
+
+function CoinCount({index, coinIndex, setSwap, setContainer, getFirstCoinPrice, getSecondCoinPrice, getCoinCount, setCoinCount} : {index: number, coinIndex: number, setContainer: React.Dispatch<React.SetStateAction<number>>, getFirstCoinPrice: number, getSecondCoinPrice: number, setSwap: React.Dispatch<React.SetStateAction<boolean>>, getCoinCount: number[], setCoinCount: React.Dispatch<React.SetStateAction<number[]>>}) {
+  const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    //숫자만 써지게 하는거. 
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, ''); //소수점도 같이 없어짐. 
+
+    //state에 적용
+    let coin = [...getCoinCount];
+    coin[index] = +input.value;
+    coin[index].toFixed(10); 
+    console.log(coin[index]);
+    setCoinCount(coin);
+  }
+
+  return (
+    <div className='InputPanel'> 
+      <div className='Input'>
+        <input className='TextInput' value={getCoinCount[index]} onChange={onChange} placeholder='0.0'  onFocus={OnFocus}></input>
+        <button className='CoinChange' onClick={() => {
+          setContainer(index);
+          setSwap(false);
+        }}>{coinList[coinIndex].name}</button>
+      </div>
+      <p className='USDText'>${
+        getCoinCount[0] != 0 ?
+        getCoinCount[index] * (index == 0 ? getFirstCoinPrice : getSecondCoinPrice) : 0
+      }</p>
+    </div>
+  )
+}
+
+function OnFocus(element: React.ChangeEvent<HTMLInputElement>) {
+  element.currentTarget.focus();
 }
 
 export default App;

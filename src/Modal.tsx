@@ -68,11 +68,11 @@ function Coin({index, setOpen, getContainer, setFirstCoin, setSecondCoin, setCoi
 }
 
 function SetCoinPrice(idx: number, setCoinPrice: React.Dispatch<React.SetStateAction<number>>) {
-  //axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
-  //  .then(res => {
-  //    setCoinPrice(+res.data[coinList[idx].id]['usd']);
-  //    console.log(+res.data[coinList[idx].id]['usd']);
-  //  });
+  axios.get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=USD&ids=${coinList[idx].id}`)
+    .then(res => {
+      setCoinPrice(+res.data[coinList[idx].id]['usd']);
+      console.log(+res.data[coinList[idx].id]['usd']);
+    });
 }
 
 
