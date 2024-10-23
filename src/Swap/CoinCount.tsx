@@ -17,8 +17,8 @@ export default function CoinCount({index, coinIndex, setSwap, setContainer, getC
     const onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         //숫자만 써지게 하는거. 
         const input = event.target as HTMLInputElement;
-        input.value = input.value.replace(/[^0-9\.]/g, ""); //소수점도 같이 없어짐. 
-
+        input.value = input.value.replace(/[^0-9]/g, ''); //소수점도 같이 없어짐. 
+    
         //현 코인 state에 적용
         let coin = [...getCoinCount];
         coin[index] = +input.value;
@@ -52,6 +52,3 @@ export default function CoinCount({index, coinIndex, setSwap, setContainer, getC
 function OnFocus(element: React.ChangeEvent<HTMLInputElement>) {
     element.currentTarget.focus();
 }
-
-
-//type='number' 
