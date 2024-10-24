@@ -10,7 +10,7 @@
   width: 100%;
   height: 100%;
   background: #1F2226;
-  border-radius: 25px;
+  border-radius: 5px;
 }
 
 .InputPanel {
@@ -18,7 +18,7 @@
   height: 100px;
   margin: auto;
   background:#2a2e34;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .Input {

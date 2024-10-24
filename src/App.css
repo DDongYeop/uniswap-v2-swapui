@@ -2,7 +2,7 @@
   text-align: center;
   display: flex;
   height: 100vh;
-  background: #30242c;
+  background: #303030;
   display: flex;
 }
 
@@ -32,7 +32,7 @@
   height: 30px;
   width: 30px;
   background: whitesmoke;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .TextInput {
